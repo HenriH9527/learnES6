@@ -81,3 +81,91 @@ bar //'bbb'
 
 //3.字符串的解构赋值
 
+const [a, b, c, d, e] = 'hello';
+a //"h",
+b //"e",...
+
+//数值和布尔值的解构赋值
+//解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。
+
+let {toString: s} = 123;
+s === Number.prototype.toString  //true
+
+let {toString: s} = true;
+s === Boolean.prototype.toString // true
+
+//5.函数的参数也可以使用解构赋值
+
+function adds([x, y]) {
+	return x + y;
+}
+adds([1, 2]); //3
+
+// 为变量指定默认值
+[[1, 2], [3, 4]].map(([a, b]) => a + b);
+//[3, 7]
+function move({x = 0, y = 0} = {}){
+	return [x, y];
+}
+
+//解构赋值的用途
+
+//1.交换变量的值
+
+let x = 1, y = 2;
+
+[x, y] = [y, x];
+
+//2.从函数返回多个值
+
+function example() {
+	return [1, 2, 3];
+}
+let [a, b, c] = example();
+
+//3.函数参数的定义
+
+function f([x, y, z]) { 
+	///....
+}
+f([1, 2, 3]);
+f({z:3, y:2, z:1});
+
+//4.提取JSON数据
+
+let jsonData = {
+	id: 22,
+	status: 'ok',
+	data: [989, 34]
+}
+
+let { id, status, data:number } = jsonData;
+
+//5.函数参数的吗默认值
+
+jQuery.ajax = function(url, {
+	async = true,
+	beforeSend = function() {},
+	cache = true,
+	complate = function() {},
+	crossDomain = false,
+	glabal = true,
+	//...
+} = {}) {
+	//do something
+};
+
+//6.遍历map结构
+
+const map = new Map();
+map.set('first', 'hello');
+map.set('second', 'world');
+
+for (let [key, value] of map) {
+	console.log(key + 'is' + value);
+}
+//first is hello
+//second is world
+
+//7.输入模块的指定方法
+const { sourceMapConsumer, SourceNode } = require("source-map");
