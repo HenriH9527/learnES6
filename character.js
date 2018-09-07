@@ -80,3 +80,36 @@ let func = eval.call(null, str);
 func('Jack');  //"Hello Jack"
 
 //6.实例：模板编译
+
+//标签模板
+
+jsx`
+    <div>
+        <input ref ='input' onChange='${this.handleChange}' defaultValue='${this.state.vale}'/>
+        ${this.state.value}
+    </div>
+`
+
+//7.String.raw()  用来充当模板字符串的处理函数，返回一个斜杠都被转义的字符串，对应于替换变量后的模板字符串。
+
+String.raw`Hi\n${2+3}!`;
+//返回 " Hi\\5!"
+
+String.raw({raw: 'test'},0, 1, 2);
+//'t0e1s2t'
+
+//等同于
+String.raw({raw: ['t', 'e', 's', 't']},0, 1, 2);
+
+//String.raw的代码实现
+
+String.raw = function(strings, ...values) {
+    let output = "";
+    let index;
+    for (let index = 0; index < values.length; index++) {
+        output += string.raw[index] + values[index];
+    }
+
+    output += strings.raw[index];
+    return output;
+}
