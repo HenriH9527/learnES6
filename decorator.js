@@ -312,7 +312,7 @@ class FooComponent {
 let foo = new FooComponent();
 
 foo.someMethod();
-foo.anotherMethod();
+foo.anotherMethod();w
 // 以后，只要调用someMethod或者anotherMethod，就会自动发出一个事件。
 
 // Mixin
